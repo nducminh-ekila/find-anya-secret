@@ -1,0 +1,42 @@
+services:
+  find-anya-secret-db:
+    image: postgres:latest
+    env_file:
+      - .env
+    ports:
+      - "5434:5432"
+    volumes:
+      - data:/var/lib/postgresql/data
+  
+  find-anya-secret-django:
+    build:
+      context: .
+    command: gunicorn app.wsgi:application --bind 0.0.0.0:8000
+    stdin_open: true
+    tty: true
+    ports:
+      - "8001:8000"
+    networks:
+      - proxy
+    env_file:
+      - .env
+    depends_on: 
+      - find-anya-secret-db
+    restart: always
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=proxy
+      - traefik.http.services.anya-secret-django.loadbalancer.server.port=8000
+      - traefik.http.routers.anya-secret-django.rule=Host(`anya-secret.ekila.vn`)
+      - traefik.http.routers.anya-secret-django.entrypoints=websecure
+      - traefik.http.routers.anya-secret-django.tls=true
+      - traefik.http.routers.anya-secret-django.tls.certresolver=letsencrypt
+    
+
+volumes:
+  data:
+
+
+networks:
+  proxy:
+    external: true

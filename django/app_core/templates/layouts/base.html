@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Anya</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% csrf_token %}
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/application.css' %}">
+    <script src="{% static 'js/application.js' %}" defer></script>
+  </head>
+
+  <body>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert-{{ message.tags }}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    {% include "layouts/header.html" %}
+    {% block content %}{% endblock %}
+  </body>
+</html>

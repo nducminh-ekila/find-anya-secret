@@ -1,0 +1,17 @@
+<nav>
+  <ul>
+    <li><a href="{% url 'index' %}">Home</a></li>
+    
+    {% if is_anya %}
+      <li><a href="{% url 'pages:anya' %}">Secret Page</a></li>
+    {% endif %}
+    
+    {% if request.user.is_authenticated %}
+      <li class="right"><a href="{% url 'user_session_destroy' %}">Log out</a></li>
+    {% else %}
+      <li class="right"><a href="{% url 'user_session_create' %}">Login</a></li>
+      <li class="right"><a href="{% url 'user_create' %}">Register</a></li>
+    {% endif %}
+  </ul>
+</nav>
+<br>

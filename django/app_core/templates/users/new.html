@@ -1,0 +1,35 @@
+{% extends "layouts/base.html" %}
+
+{% block content %}
+<h1>Registration</h1>
+
+<form method="post">
+  {% csrf_token %}
+
+  {% if form.errors %}
+    <div class="errors">
+      <ul>
+        {% for field in form %}
+          {% for error in field.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <div>
+    <label for="{{ form.name.id_for_label }}">Name:</label><br>
+    {{ form.name }}
+  </div>
+
+  <div>
+    <label for="{{ form.password.id_for_label }}">Password:</label><br>
+    {{ form.password }}
+  </div>
+
+  <p>
+    <button type="submit">Create User</button>
+  </p>
+</form>
+{% endblock %}
