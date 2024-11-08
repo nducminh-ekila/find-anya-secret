@@ -8,7 +8,7 @@ Your mission is to interact and try to exploit a cloud-hosted website to uncover
 
 You are provided with the following resources:
 
-- A cloud-hosted website: [https://hello-anya.fly.dev](https://hello-anya.fly.dev)
+- A cloud-hosted website: [https://anya-secret.ekila.vn](https://anya-secret.ekila.vn)
 - The name of the text file that holds the secret key: **"secret_file"**
 - The source code of the above website (the actual "secret_file" is not included)
 - The first three letters of the secret: **"19b"**
